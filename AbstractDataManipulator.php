@@ -1,6 +1,10 @@
 <?php
 
-class DataManipulator
+/**
+ * Class AbstractDataManipulator.
+ * Класс помогающий манипулировать данными пользователя.
+ */
+abstract class AbstractDataManipulator
 {
     /**
      * Объект парсера данных.
@@ -24,7 +28,9 @@ class DataManipulator
     protected $pathToPeopleTexts = __DIR__ . '/texts';
 
     /**
-     * @var array $allPeopleFiles
+     * Все файлы пользователей, которые удалось получить из соответствующей директории.
+     *
+     * @var array
      */
     protected $allPeopleFiles;
 
@@ -64,7 +70,7 @@ class DataManipulator
      *
      * @return array
      *
-     * @throws Exception
+     * @throws Exception Если не удалось открыть директорию.
      */
     protected function getAllPeopleFiles()
     {

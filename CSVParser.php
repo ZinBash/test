@@ -4,7 +4,7 @@ require_once __DIR__ . '/interfaces/DataParserInterface.php';
 
 /**
  * Class CSVParser.
- * Класс помога.щий получить даные из csv-файлов.
+ * Класс помогающий получить даные из csv-файлов.
  */
 class CSVParser implements DataParserInterface
 {

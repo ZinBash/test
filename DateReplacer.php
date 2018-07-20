@@ -1,8 +1,12 @@
 <?php
 
-require_once __DIR__ . '/DataManipulator.php';
+require_once __DIR__ . '/AbstractDataManipulator.php';
 
-class DateReplacer extends DataManipulator
+/**
+ * Class DateReplacer.
+ * Класс для замещения дат в пользовательских файлах.
+ */
+class DateReplacer extends AbstractDataManipulator
 {
     /**
      * Путь до директории с результирующими текстами.
@@ -15,7 +19,8 @@ class DateReplacer extends DataManipulator
      * Метод производит замену дат формата dd/mm/yy на mm-dd-yyyy в текстах людей.
      * Записывает результирующие файлы в отдельную директорию.
      *
-     * @throws Exception
+     * @throws Exception Если возникли проблемы с записью результирующего файла
+     *  или не удалось прочитать исходные данные.
      */
     public function replaceDates()
     {
@@ -34,7 +39,7 @@ class DateReplacer extends DataManipulator
      *
      * @return int
      *
-     * @throws Exception
+     * @throws Exception Если возникли проблемы с записью файла или не удалось прочитать исходные данные.
      */
     protected function replaceDatesForMan($id)
     {
@@ -62,9 +67,9 @@ class DateReplacer extends DataManipulator
      * @param string $fileName Имя исходного файла.
      * @param string $data     Данные для записи.
      *
-     * @return bool|int
+     * @return int
      *
-     * @throws Exception
+     * @throws Exception Если возникли проблемы с записью.
      */
     protected function putFileContents($fileName, $data)
     {
@@ -75,6 +80,9 @@ class DateReplacer extends DataManipulator
             throw new Exception('Директория ' . $this->outputPath . ' не доступна для записи');
         }
         $fileName = $this->outputPath . '/' . $fileName;
-        return file_put_contents($fileName, $data);
+        if (! $result = file_put_contents($fileName, $data)) {
+            throw new Exception('Не удалось записать данные в файл ' . $fileName);
+        }
+        return $result;
     }
 }

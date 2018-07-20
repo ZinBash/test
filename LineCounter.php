@@ -1,12 +1,16 @@
 <?php
-require_once __DIR__ . '/DataManipulator.php';
+require_once __DIR__ . '/AbstractDataManipulator.php';
 
-class LineCounter extends DataManipulator
+/**
+ * Class LineCounter.
+ * Класс подсчитывающий среднее количество строк во всех файлах пользователя.
+ */
+class LineCounter extends AbstractDataManipulator
 {
     /**
      * Подсчет среднего количества строк для всех людей.
      *
-     * @throws Exception Если не удалось получить данные.
+     * @throws Exception Если не удалось получить исходные данные.
      */
     public function countAverageLineCount()
     {
@@ -25,7 +29,7 @@ class LineCounter extends DataManipulator
      *
      * @return float|int
      *
-     * @throws Exception
+     * @throws Exception  Если не удалось открыть директорию с данными.
      */
     protected function countAverageForMan($id)
     {
